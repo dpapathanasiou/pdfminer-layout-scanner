@@ -9,7 +9,8 @@ from binascii import b2a_hex
 ### pdf-miner requirements
 ###
 
-from pdfminer.pdfparser import PDFParser, PDFDocument, PDFNoOutlines
+from pdfminer.pdfparser import PDFParser
+from pdfminer.pdfdocument import PDFDocument, PDFNoOutlines
 from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.converter import PDFPageAggregator
 from pdfminer.layout import LAParams, LTTextBox, LTTextLine, LTFigure, LTImage, LTChar
