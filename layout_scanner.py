@@ -43,9 +43,9 @@ def with_pdf (pdf_doc, fn, pdf_pwd, *args):
     return result
 
 
-### 
+###
 ### Table of Contents
-### 
+###
 
 def _parse_toc (doc):
     """With an open PDFDocument object, get the table of contents (toc) data
@@ -147,9 +147,10 @@ def update_page_text_hash (h, lt_obj, pct=0.2):
 
     return h
 
-def parse_lt_objs (lt_objs, page_number, images_folder, text=[]):
+def parse_lt_objs (lt_objs, page_number, images_folder, text_content=None):
     """Iterate through the list of LT* objects and capture the text or image data contained in each"""
-    text_content = [] 
+    if text_content is None:
+        text_content = []
 
     page_text = {} # k=(x0, x1) of the bbox, v=list of text strings within that bbox width (physical column)
     for lt_obj in lt_objs:
@@ -157,7 +158,7 @@ def parse_lt_objs (lt_objs, page_number, images_folder, text=[]):
             # text, so arrange is logically based on its column width
             page_text = update_page_text_hash(page_text, lt_obj)
         elif isinstance(lt_obj, LTImage):
-            # an image, so save it to the designated folder, and note its place in the text 
+            # an image, so save it to the designated folder, and note its place in the text
             saved_file = save_image(lt_obj, page_number, images_folder)
             if saved_file:
                 # use html style <img /> tag to mark the position of the image within the text
